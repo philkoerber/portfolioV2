@@ -2,6 +2,7 @@ import Navigator from "./Navigator";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Graph from "./Graph";
+import MotionParent from "./MotionParent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({ children }) {
           <div className="absolute w-screen h-screen z-0">
             <Graph />
           </div>
-          <div className="z-100 text-white"> {children}</div>
+          <div className="absolute z-100 text-white w-screen mt-10">
+            {children}
+          </div>
         </div>
       </body>
     </html>

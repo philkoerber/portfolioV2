@@ -3,23 +3,53 @@
 import React from "react";
 import { useRef, useCallback, useEffect } from "react";
 import ForceGraph3D from "react-force-graph-3d";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
+
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
 
 const data = {
   nodes: [
+    //main
+    { id: "home", group: 1, size: 50, color: "gray" },
     { id: "about", group: 1, size: 50, color: "gray" },
-    { id: "contact", group: 2, size: 80, color: "gray" },
+    { id: "contact", group: 1, size: 80, color: "gray" },
     { id: "discography", group: 1, size: 6, color: "gray" },
-    { id: "equipment", group: 3, size: 7, color: "gray" },
-    { id: "sets", group: 2, size: 9, color: "gray" },
+    { id: "equipment", group: 1, size: 7, color: "gray" },
+    //sub
+    { id: "discography/physical", group: 1, size: 50, color: "gray" },
+    { id: "discography/digital", group: 1, size: 50, color: "gray" },
+    { id: "discography/sets", group: 1, size: 50, color: "gray" },
   ],
   links: [
-    { source: "about", target: "about", value: 3 },
-    { source: "contact", target: "about", value: 4 },
-    { source: "discography", target: "about", value: 2 },
-    { source: "equipment", target: "about", value: 5 },
-    { source: "sets", target: "about", value: 3 },
+    //main
+    { source: "about", target: "home", value: 3 },
+    { source: "contact", target: "home", value: 4 },
+    { source: "discography", target: "home", value: 2 },
+    { source: "equipment", target: "home", value: 5 },
+    //sub
+    { source: "discography", target: "discography/sets", value: 2 },
+    { source: "discography", target: "discography/physical", value: 5 },
+    { source: "discography", target: "discography/digital", value: 3 },
   ],
+};
+
+const createCustomNode = (node) => {
+  const group = new THREE.Group();
+
+  // Load your 3D model here
+  const loader = new GLTFLoader();
+  loader.load("path/to/your/model.gltf", (gltf) => {
+    // Add your loaded model to the group
+    group.add(gltf.scene);
+
+    // You can customize the position, rotation, and scale of the model here
+    gltf.scene.position.set(0, 0, 0);
+    gltf.scene.rotation.set(0, 0, 0);
+    gltf.scene.scale.set(1, 1, 1);
+  });
+
+  return group;
 };
 
 function Graph(props) {
@@ -30,8 +60,8 @@ function Graph(props) {
   const handleClick = useCallback(
     (node) => {
       // Aim at node from outside it
-      const distance = 60;
-      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+      const distance = 20;
+      const distRatio = 1 + (distance * 2) / Math.hypot(node.x, node.y, node.z);
 
       fgRef.current.cameraPosition(
         { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
@@ -47,9 +77,12 @@ function Graph(props) {
     const nodeToFocus = data.nodes.find(
       (node) => node.id === pathname.slice(1)
     );
-    console.log(pathname.slice(1));
+
     if (nodeToFocus) {
-      handleClick(nodeToFocus);
+      console.log("going to " + pathname);
+      setTimeout(() => {
+        handleClick(nodeToFocus);
+      }, 100);
     }
   }, [pathname]);
 
@@ -59,7 +92,7 @@ function Graph(props) {
       graphData={data} // Use the example data here
       nodeLabel="id"
       nodeAutoColorBy="group"
-      onNodeClick={handleClick}
+      nodeThree={createCustomNode}
     />
   );
 }
