@@ -1,14 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import Zapper from "../Zapper";
 
 function Discography(props) {
-  return (
-    <div className="flex">
-      <Link href={"/discography/releases"}>Physical Releases</Link>
-      <Link href={"/discography/digital"}>Digital</Link>
-      <Link href={"/discography/sets"}>Sets</Link>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Discography;

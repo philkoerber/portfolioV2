@@ -11,15 +11,15 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
 const data = {
   nodes: [
     //main
-    { id: "home", group: 1, size: 50, color: "gray" },
-    { id: "about", group: 1, size: 50, color: "gray" },
-    { id: "contact", group: 1, size: 80, color: "gray" },
-    { id: "discography", group: 1, size: 6, color: "gray" },
-    { id: "equipment", group: 1, size: 7, color: "gray" },
+    { id: "home" },
+    { id: "about" },
+    { id: "contact" },
+    { id: "discography" },
+    { id: "equipment" },
     //sub
-    { id: "discography/physical", group: 1, size: 50, color: "gray" },
-    { id: "discography/digital", group: 1, size: 50, color: "gray" },
-    { id: "discography/sets", group: 1, size: 50, color: "gray" },
+    { id: "discography/physical" },
+    { id: "discography/digital" },
+    { id: "discography/sets" },
   ],
   links: [
     //main
@@ -35,18 +35,40 @@ const data = {
 };
 
 const createCustomNode = (node) => {
+  console.log(node);
   const group = new THREE.Group();
 
+  const getModelById = (id) => {
+    if (id === "discography/sets") {
+      return "/turntable.glb";
+    } else {
+      return "/synthesizer.glb";
+    }
+  };
   // Load your 3D model here
   const loader = new GLTFLoader();
-  loader.load("path/to/your/model.gltf", (gltf) => {
+  loader.load(getModelById(node.id), (gltf) => {
     // Add your loaded model to the group
     group.add(gltf.scene);
 
     // You can customize the position, rotation, and scale of the model here
     gltf.scene.position.set(0, 0, 0);
-    gltf.scene.rotation.set(0, 0, 0);
+
     gltf.scene.scale.set(1, 1, 1);
+
+    gltf.scene.rotation.set(0, 0, 0);
+
+    const rotateNode = () => {
+      // You can adjust the rotation speed and axes as needed
+      gltf.scene.rotation.x += 0.006; // Rotate around the X-axis
+      gltf.scene.rotation.y += 0.007; // Rotate around the Y-axis
+      gltf.scene.rotation.z += 0.008; // Rotate around the Z-axis
+
+      // Request the next frame
+      requestAnimationFrame(rotateNode);
+    };
+
+    rotateNode();
   });
 
   return group;
@@ -61,7 +83,7 @@ function Graph(props) {
     (node) => {
       // Aim at node from outside it
       const distance = 20;
-      const distRatio = 1 + (distance * 2) / Math.hypot(node.x, node.y, node.z);
+      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
       fgRef.current.cameraPosition(
         { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
@@ -92,7 +114,7 @@ function Graph(props) {
       graphData={data} // Use the example data here
       nodeLabel="id"
       nodeAutoColorBy="group"
-      nodeThree={createCustomNode}
+      nodeThreeObject={createCustomNode}
     />
   );
 }
