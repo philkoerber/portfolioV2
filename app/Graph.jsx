@@ -56,12 +56,17 @@ const createCustomNode = (node) => {
     gltf.scene.scale.set(1, 1, 1);
 
     gltf.scene.rotation.set(0, 0, 0);
+    const randomRotation = {
+      x: Math.random() * 0.003 + 0.004,
+      y: Math.random() * 0.003 + 0.004,
+      z: Math.random() * 0.003 + 0.004,
+    };
 
     const rotateNode = () => {
       // You can adjust the rotation speed and axes as needed
-      gltf.scene.rotation.x += 0.006; // Rotate around the X-axis
-      gltf.scene.rotation.y += 0.007; // Rotate around the Y-axis
-      gltf.scene.rotation.z += 0.008; // Rotate around the Z-axis
+      gltf.scene.rotation.x += randomRotation.x; // Rotate around the X-axis
+      gltf.scene.rotation.y += randomRotation.y; // Rotate around the Y-axis
+      gltf.scene.rotation.z += randomRotation.z; // Rotate around the Z-axis
 
       // Request the next frame
       requestAnimationFrame(rotateNode);
@@ -74,53 +79,51 @@ const createCustomNode = (node) => {
 };
 
 function Graph(props) {
-  if (typeof window !== undefined) {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    const fgRef = useRef();
+  const fgRef = useRef();
 
-    const handleClick = useCallback(
-      (node) => {
-        // Aim at node from outside it
-        const distance = 20;
-        const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+  const handleClick = useCallback(
+    (node) => {
+      // Aim at node from outside it
+      const distance = 20;
+      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
-        fgRef.current.cameraPosition(
-          {
-            x: node.x * distRatio,
-            y: node.y * distRatio,
-            z: node.z * distRatio,
-          }, // new position
-          node, // lookAt ({ x, y, z })
-          3000 // ms transition duration
-        );
-      },
-      [fgRef]
-    );
-
-    useEffect(() => {
-      // Find the node with the same ID as the current pathname
-      const nodeToFocus = data.nodes.find(
-        (node) => node.id === pathname.slice(1)
+      fgRef.current.cameraPosition(
+        {
+          x: node.x * distRatio,
+          y: node.y * distRatio,
+          z: node.z * distRatio,
+        }, // new position
+        node, // lookAt ({ x, y, z })
+        3000 // ms transition duration
       );
+    },
+    [fgRef]
+  );
 
-      if (nodeToFocus) {
-        setTimeout(() => {
-          handleClick(nodeToFocus);
-        }, 100);
-      }
-    }, [pathname]);
-
-    return (
-      <ForceGraph3D
-        ref={fgRef}
-        graphData={data} // Use the example data here
-        nodeLabel="id"
-        nodeAutoColorBy="group"
-        nodeThreeObject={createCustomNode}
-      />
+  useEffect(() => {
+    // Find the node with the same ID as the current pathname
+    const nodeToFocus = data.nodes.find(
+      (node) => node.id === pathname.slice(1)
     );
-  } else return null;
+
+    if (nodeToFocus) {
+      setTimeout(() => {
+        handleClick(nodeToFocus);
+      }, 100);
+    }
+  }, [pathname]);
+
+  return (
+    <ForceGraph3D
+      ref={fgRef}
+      graphData={data} // Use the example data here
+      nodeLabel="id"
+      nodeAutoColorBy="group"
+      nodeThreeObject={createCustomNode}
+    />
+  );
 }
 
 export default Graph;
