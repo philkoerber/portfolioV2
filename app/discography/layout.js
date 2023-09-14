@@ -5,7 +5,7 @@ import Zapper from "../utils/Zapper";
 function layout({ children }) {
   return (
     <div>
-      <div className="w-full flex justify-center gap-8">
+      <div className="w-full flex justify-center gap-8 mt-8">
         <Zapper>
           <Link href={"/discography/releases"}>Physical Releases</Link>
         </Zapper>

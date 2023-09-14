@@ -1,9 +1,14 @@
 import Navigator from "./Navigator";
 import "./globals.css";
+import dynamic from "next/dynamic";
+
 import { Inter } from "next/font/google";
-import Graph from "./Graph";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const Graph = dynamic(() => import("./Graph"), {
+  ssr: false,
+});
 
 export const metadata = {
   title: "DZA",
@@ -22,9 +27,7 @@ export default function RootLayout({ children }) {
           <div className="fixed w-screen h-screen z-0">
             <Graph />
           </div>
-          <div className="absolute z-100 text-white w-screen mt-10">
-            {children}
-          </div>
+          <div className="absolute z-100 text-white w-screen">{children}</div>
         </div>
       </body>
     </html>

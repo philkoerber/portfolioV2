@@ -13,7 +13,7 @@ const data = {
     //main
     { id: "home" },
     { id: "about" },
-    { id: "contact" },
+    { id: "socials" },
     { id: "discography" },
     { id: "equipment" },
     //sub
@@ -24,7 +24,7 @@ const data = {
   links: [
     //main
     { source: "about", target: "home", value: 3 },
-    { source: "contact", target: "home", value: 4 },
+    { source: "socials", target: "home", value: 4 },
     { source: "discography", target: "home", value: 2 },
     { source: "equipment", target: "home", value: 5 },
     //sub

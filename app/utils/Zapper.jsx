@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 function Zapper({ children }) {
-  const randomDuration = Math.random() * 0.5 + 0.5;
+  const randomDuration = Math.random() * 0.5 + 0.1;
   return (
     <motion.div
       initial={{ scaleY: 0 }}
