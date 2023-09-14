@@ -35,7 +35,6 @@ const data = {
 };
 
 const createCustomNode = (node) => {
-  console.log(node);
   const group = new THREE.Group();
 
   const getModelById = (id) => {
@@ -75,48 +74,53 @@ const createCustomNode = (node) => {
 };
 
 function Graph(props) {
-  const pathname = usePathname();
+  if (typeof window !== undefined) {
+    const pathname = usePathname();
 
-  const fgRef = useRef();
+    const fgRef = useRef();
 
-  const handleClick = useCallback(
-    (node) => {
-      // Aim at node from outside it
-      const distance = 20;
-      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+    const handleClick = useCallback(
+      (node) => {
+        // Aim at node from outside it
+        const distance = 20;
+        const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
-      fgRef.current.cameraPosition(
-        { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-        node, // lookAt ({ x, y, z })
-        3000 // ms transition duration
-      );
-    },
-    [fgRef]
-  );
-
-  useEffect(() => {
-    // Find the node with the same ID as the current pathname
-    const nodeToFocus = data.nodes.find(
-      (node) => node.id === pathname.slice(1)
+        fgRef.current.cameraPosition(
+          {
+            x: node.x * distRatio,
+            y: node.y * distRatio,
+            z: node.z * distRatio,
+          }, // new position
+          node, // lookAt ({ x, y, z })
+          3000 // ms transition duration
+        );
+      },
+      [fgRef]
     );
 
-    if (nodeToFocus) {
-      console.log("going to " + pathname);
-      setTimeout(() => {
-        handleClick(nodeToFocus);
-      }, 100);
-    }
-  }, [pathname]);
+    useEffect(() => {
+      // Find the node with the same ID as the current pathname
+      const nodeToFocus = data.nodes.find(
+        (node) => node.id === pathname.slice(1)
+      );
 
-  return (
-    <ForceGraph3D
-      ref={fgRef}
-      graphData={data} // Use the example data here
-      nodeLabel="id"
-      nodeAutoColorBy="group"
-      nodeThreeObject={createCustomNode}
-    />
-  );
+      if (nodeToFocus) {
+        setTimeout(() => {
+          handleClick(nodeToFocus);
+        }, 100);
+      }
+    }, [pathname]);
+
+    return (
+      <ForceGraph3D
+        ref={fgRef}
+        graphData={data} // Use the example data here
+        nodeLabel="id"
+        nodeAutoColorBy="group"
+        nodeThreeObject={createCustomNode}
+      />
+    );
+  } else return null;
 }
 
 export default Graph;

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Zapper from "../Zapper";
+import Zapper from "../utils/Zapper";
 
 function layout({ children }) {
   return (

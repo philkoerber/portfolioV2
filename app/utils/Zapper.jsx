@@ -10,7 +10,7 @@ function Zapper({ children }) {
       initial={{ scaleY: 0 }}
       animate={{ scaleY: 1 }}
       exit={{ scaleY: 0 }}
-      transition={{ duration: randomDuration, ease: "easeInOut" }}>
+      transition={{ duration: randomDuration }}>
       {children}
     </motion.div>
   );

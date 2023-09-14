@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Zapper from "./Zapper";
+import Zapper from "./utils/Zapper";
 const navItemStyles = "hover:font-bold transition duration-200";
 function Navigator() {
   return (
