@@ -40,6 +40,15 @@ const createCustomNode = (node) => {
   const getModelById = (id) => {
     if (id === "discography/sets") {
       return "/turntable.glb";
+    }
+    if (id === "discography") {
+      return "/speaker.glb";
+    }
+    if (id === "socials") {
+      return "/iphone.glb";
+    }
+    if (id === "about") {
+      return "/human.glb";
     } else {
       return "/synthesizer.glb";
     }
