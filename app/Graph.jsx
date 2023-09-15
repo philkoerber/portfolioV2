@@ -122,6 +122,7 @@ function Graph(props) {
       nodeLabel="id"
       nodeAutoColorBy="group"
       nodeThreeObject={createCustomNode}
+      showNavInfo={false}
     />
   );
 }
