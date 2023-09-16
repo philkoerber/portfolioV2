@@ -14,7 +14,7 @@ function Navigator() {
 
         <Zapper>
           <li className={navItemStyles}>
-            <Link href="/discography">Discography</Link>
+            <Link href="/listen">Listen</Link>
           </li>
         </Zapper>
 

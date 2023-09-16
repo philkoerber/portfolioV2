@@ -14,8 +14,6 @@ const YoutubePlayer = ({ embedId }) => {
   return (
     <div className="relative pb-[56.25%] overflow-hidden w-full">
       <iframe
-        width="853"
-        height="480"
         className="absolute left-0 top-0 h-full w-full"
         src={`https://www.youtube.com/embed/${embedId}`}
         frameBorder="0"

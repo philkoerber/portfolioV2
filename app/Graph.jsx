@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import ForceGraph3D from "react-force-graph-3d";
 import { usePathname } from "next/navigation";
 
@@ -14,23 +14,23 @@ const data = {
     { id: "home" },
     { id: "about" },
     { id: "socials" },
-    { id: "discography" },
+    { id: "listen" },
     { id: "equipment" },
     //sub
-    { id: "discography/physical" },
-    { id: "discography/digital" },
-    { id: "discography/sets" },
+    { id: "listen/releases" },
+    { id: "listen/digital" },
+    { id: "listen/sets" },
   ],
   links: [
     //main
     { source: "about", target: "home", value: 3 },
     { source: "socials", target: "home", value: 4 },
-    { source: "discography", target: "home", value: 2 },
+    { source: "listen", target: "home", value: 2 },
     { source: "equipment", target: "home", value: 5 },
     //sub
-    { source: "discography", target: "discography/sets", value: 2 },
-    { source: "discography", target: "discography/physical", value: 5 },
-    { source: "discography", target: "discography/digital", value: 3 },
+    { source: "listen", target: "listen/sets", value: 2 },
+    { source: "listen", target: "listen/releases", value: 5 },
+    { source: "listen", target: "listen/digital", value: 3 },
   ],
 };
 
@@ -38,10 +38,10 @@ const createCustomNode = (node) => {
   const group = new THREE.Group();
 
   const getModelById = (id) => {
-    if (id === "discography/sets") {
+    if (id === "listen/sets") {
       return "/turntable.glb";
     }
-    if (id === "discography") {
+    if (id === "listen") {
       return "/speaker.glb";
     }
     if (id === "socials") {
@@ -89,8 +89,26 @@ const createCustomNode = (node) => {
 
 function Graph(props) {
   const pathname = usePathname();
-
   const fgRef = useRef();
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    //window resize logic
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleClick = useCallback(
     (node) => {
@@ -127,7 +145,9 @@ function Graph(props) {
   return (
     <ForceGraph3D
       ref={fgRef}
-      graphData={data} // Use the example data here
+      width={windowSize.width}
+      height={windowSize.height}
+      graphData={data}
       nodeLabel="id"
       nodeAutoColorBy="group"
       nodeThreeObject={createCustomNode}
