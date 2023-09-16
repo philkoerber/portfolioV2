@@ -20,7 +20,6 @@ const musicEquipment = [
   "Aphex Twin's 'Syro' Patch Configurations",
   "Modular Synthesizer",
   "Arturia V Collection",
-  "MIDI Controllers (e.g., Novation Launchpad, Ableton Push)",
   "Field Recording Equipment",
   "Native Instruments Komplete",
   "Dave Smith Instruments Prophet",
@@ -33,11 +32,11 @@ const musicEquipment = [
 
 function Equipment(props) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen p-8 py-20">
       {musicEquipment.map((item) => {
         return (
           <Zapper>
-            <div>{item}</div>
+            <div className="text-center">{item}</div>
           </Zapper>
         );
       })}
