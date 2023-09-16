@@ -18,7 +18,7 @@ const data = {
     { id: "equipment" },
     //sub
     { id: "listen/releases" },
-    { id: "listen/digital" },
+    { id: "listen/soundtracks" },
     { id: "listen/sets" },
   ],
   links: [
@@ -30,10 +30,9 @@ const data = {
     //sub
     { source: "listen", target: "listen/sets", value: 2 },
     { source: "listen", target: "listen/releases", value: 5 },
-    { source: "listen", target: "listen/digital", value: 3 },
+    { source: "listen", target: "listen/soundtracks", value: 3 },
   ],
 };
-
 const createCustomNode = (node) => {
   const group = new THREE.Group();
 
@@ -53,18 +52,36 @@ const createCustomNode = (node) => {
       return "/synthesizer.glb";
     }
   };
+
+  // Generate a random color
+  const randomColor = new THREE.Color(
+    Math.random(),
+    Math.random(),
+    Math.random()
+  );
+
   // Load your 3D model here
   const loader = new GLTFLoader();
   loader.load(getModelById(node.id), (gltf) => {
+    // Traverse the model's hierarchy to apply materials
+    gltf.scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        // Create a new material with the random color and standard shading
+        const material = new THREE.MeshStandardMaterial({ color: randomColor });
+
+        // Assign the new material to the mesh
+        child.material = material;
+      }
+    });
+
     // Add your loaded model to the group
     group.add(gltf.scene);
 
     // You can customize the position, rotation, and scale of the model here
     gltf.scene.position.set(0, 0, 0);
-
     gltf.scene.scale.set(1, 1, 1);
-
     gltf.scene.rotation.set(0, 0, 0);
+
     const randomRotation = {
       x: Math.random() * 0.003 + 0.004,
       y: Math.random() * 0.003 + 0.004,
