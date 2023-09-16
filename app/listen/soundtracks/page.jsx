@@ -6,7 +6,7 @@ const videos = ["iz7V_IQDy2w", "lemzwlE4ygY", "ZouI8oWW1aA", "65rHnSB0884"];
 
 function Soundtracks(props) {
   return (
-    <div className="flex flex-col items-center justify-center pt-4">
+    <div className="flex flex-col items-center justify-center">
       <Zapper>
         <div className="bg-white relative max-w-[800px] w-[100vw] md:w-[45vw] h-full">
           <div className="relative pb-[50%] overflow-hidden w-full">

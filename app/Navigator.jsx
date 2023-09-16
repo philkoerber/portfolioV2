@@ -4,7 +4,7 @@ import Zapper from "./utils/Zapper";
 const navItemStyles = "hover:underline transition duration-200";
 function Navigator() {
   return (
-    <nav className="w-full absolute z-50 text-lg">
+    <nav className="w-full absolute z-50 text-lg p-4">
       <ul className="w-full flex justify-center items-center gap-8 text-white ">
         <Zapper>
           <li className={navItemStyles}>

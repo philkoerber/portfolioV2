@@ -44,7 +44,10 @@ const createCustomNode = (node) => {
       return "/speaker.glb";
     }
     if (id === "socials") {
-      return "/iphone.glb";
+      return "/laptop.glb";
+    }
+    if (id === "listen/soundtracks") {
+      return "/camera.glb";
     }
     if (id === "about") {
       return "/human.glb";
@@ -55,9 +58,9 @@ const createCustomNode = (node) => {
 
   // Generate a random color
   const randomColor = new THREE.Color(
-    Math.random(),
-    Math.random(),
-    Math.random()
+    Math.random() * 0.15, // Red component
+    Math.random() * 0.15, // Green component
+    Math.random() * 0.5 // Blue component
   );
 
   // Load your 3D model here
@@ -67,7 +70,10 @@ const createCustomNode = (node) => {
     gltf.scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         // Create a new material with the random color and standard shading
-        const material = new THREE.MeshStandardMaterial({ color: randomColor });
+        const material = new THREE.MeshToonMaterial({
+          wireframe: true,
+          color: randomColor,
+        });
 
         // Assign the new material to the mesh
         child.material = material;
