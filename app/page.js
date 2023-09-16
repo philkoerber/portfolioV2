@@ -1,7 +1,14 @@
+import Zapper from "./utils/Zapper";
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      DZA
+    <main className="flex h-screen flex-col items-center justify-center text-4xl p-24">
+      <Zapper>
+        <Link href={"/about"}>
+          <img src="./dza.svg" className="invert" />
+        </Link>
+      </Zapper>
     </main>
   );
 }

@@ -24,7 +24,7 @@ function layout({ children }) {
           </li>
         </Zapper>
       </ul>
-      <div className="py-5">{children}</div>
+      <div className="pt-5 pb-20">{children}</div>
     </div>
   );
 }
