@@ -2,9 +2,9 @@ import Navigator from "./Navigator";
 import "./globals.css";
 import dynamic from "next/dynamic";
 
-import { Inter } from "next/font/google";
+import { Space_Mono } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const space = Space_Mono({ subsets: ["latin"], weight: "400" });
 
 const Graph = dynamic(() => import("./Graph"), {
   ssr: false,
@@ -12,13 +12,13 @@ const Graph = dynamic(() => import("./Graph"), {
 
 export const metadata = {
   title: "DZA",
-  description: "MAEHHA",
+  description: "Make Autechre Hip-Hop Again",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="overflow-x-hidden">
-      <body className={inter.className}>
+      <body className={space.className}>
         <div className="">
           <Navigator />
         </div>

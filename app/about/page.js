@@ -22,13 +22,13 @@ const sashaInfo = [
 
 function About(props) {
   return (
-    <div className="h-[90vh] flex justify-center items-center">
-      <div className="flex flex-col gap-4">
+    <div className="h-[90vh] flex justify-center items-center p-8">
+      <div className="flex flex-col gap-4 text-center items-center">
         {sashaInfo.map((info) => {
           return (
             <Zapper>
-              <p>{info.title}:</p>
-              <p>{info.info}</p>
+              <p className="text-sm">{info.title}:</p>
+              <p className="text-lg">{info.info}</p>
             </Zapper>
           );
         })}
