@@ -22,7 +22,7 @@ const sashaInfo = [
 
 function About(props) {
   return (
-    <div className="h-screen flex justify-center items-center p-8">
+    <div className="min-h-screen flex justify-center items-center p-8 py-20">
       <div className="flex flex-col gap-4 text-center items-center">
         {sashaInfo.map((info) => {
           return (
