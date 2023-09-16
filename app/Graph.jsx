@@ -175,6 +175,7 @@ function Graph(props) {
       nodeAutoColorBy="group"
       nodeThreeObject={createCustomNode}
       showNavInfo={false}
+      enableNodeDrag={false}
     />
   );
 }
