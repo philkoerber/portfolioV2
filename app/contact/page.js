@@ -3,37 +3,32 @@ import Zapper from "../utils/Zapper";
 import {
   FaBandcamp,
   FaInstagram,
-  FaSpotify,
-  FaPatreon,
-  FaSoundcloud,
+  FaYoutubeSquare,
+  FaLinkedin,
+  FaMailBulk,
 } from "react-icons/fa";
 
-function Socials(props) {
+function Contact(props) {
   const socialLinks = [
     {
-      title: "Bandcamp",
-      link: "https://how2make.bandcamp.com/",
-      logo: <FaBandcamp />,
+      title: "LinkedIn",
+      link: "https://de.linkedin.com/in/philipp-koerber-p1993k1312",
+      logo: <FaLinkedin />,
+    },
+    {
+      title: "E-Mail",
+      link: "mailto:philipp.koerber.93@gmail.com",
+      logo: <FaMailBulk />,
+    },
+    {
+      title: "YouTube",
+      link: "https://www.youtube.com/@swim8008",
+      logo: <FaYoutubeSquare />,
     },
     {
       title: "Instagram",
-      link: "https://www.instagram.com/sashadza/",
+      link: "https://www.instagram.com/philipp.koerber/",
       logo: <FaInstagram />,
-    },
-    {
-      title: "Spotify",
-      link: "https://open.spotify.com/artist/1mwaNeRTnMjH53H6eyxKw2?si=1GVS6ZncSZG-264C4YcxpA&nd=1",
-      logo: <FaSpotify />,
-    },
-    {
-      title: "Patreon",
-      link: "https://www.patreon.com/how2make",
-      logo: <FaPatreon />,
-    },
-    {
-      title: "Soundcloud",
-      link: "https://soundcloud.com/dza",
-      logo: <FaSoundcloud />,
     },
   ];
 
@@ -48,7 +43,8 @@ function Socials(props) {
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:underline text-lg">
+              className="text-white hover:underline text-lg"
+            >
               {social.title}
             </a>
           </div>
@@ -58,4 +54,4 @@ function Socials(props) {
   );
 }
 
-export default Socials;
+export default Contact;

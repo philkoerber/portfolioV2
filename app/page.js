@@ -6,7 +6,7 @@ export default function Home() {
     <main className="flex h-screen flex-col items-center justify-center text-4xl p-24">
       <Zapper>
         <Link href={"/about"}>
-          <img src="./dza.svg" className="invert" />
+          <img src="./pk.svg" className="invert" />
         </Link>
       </Zapper>
     </main>

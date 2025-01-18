@@ -11,8 +11,8 @@ const Graph = dynamic(() => import("./Graph"), {
 });
 
 export const metadata = {
-  title: "DZA",
-  description: "Make Autechre Hip-Hop Again",
+  title: "Philipp Koerber",
+  description: "Hi, I am Philipp.",
 };
 
 export default function RootLayout({ children }) {

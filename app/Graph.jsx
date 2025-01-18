@@ -13,40 +13,36 @@ const data = {
     //main
     { id: "home" },
     { id: "about" },
-    { id: "socials" },
-    { id: "listen" },
-    { id: "equipment" },
+    { id: "contact" },
+    { id: "projects" },
     //sub
-    { id: "listen/releases" },
-    { id: "listen/soundtracks" },
-    { id: "listen/sets" },
+    { id: "projects/music" },
+    { id: "projects/development" },
   ],
   links: [
     //main
     { source: "about", target: "home", value: 3 },
-    { source: "socials", target: "home", value: 4 },
-    { source: "listen", target: "home", value: 2 },
-    { source: "equipment", target: "home", value: 5 },
+    { source: "contact", target: "home", value: 4 },
+    { source: "projects", target: "home", value: 2 },
     //sub
-    { source: "listen", target: "listen/sets", value: 2 },
-    { source: "listen", target: "listen/releases", value: 5 },
-    { source: "listen", target: "listen/soundtracks", value: 3 },
+    { source: "projects", target: "projects/development", value: 2 },
+    { source: "projects", target: "projects/music", value: 3 },
   ],
 };
 const createCustomNode = (node) => {
   const group = new THREE.Group();
 
   const getModelById = (id) => {
-    if (id === "listen/sets") {
-      return "/turntable.glb";
-    }
-    if (id === "listen") {
-      return "/speaker.glb";
-    }
-    if (id === "socials") {
+    if (id === "projects/development") {
       return "/laptop.glb";
     }
-    if (id === "listen/soundtracks") {
+    if (id === "projects") {
+      return "/speaker.glb";
+    }
+    if (id === "contact") {
+      return "/laptop.glb";
+    }
+    if (id === "projects/music") {
       return "/camera.glb";
     }
     if (id === "about") {

@@ -35,28 +35,14 @@ const bcReleases = [
   },
 ];
 
-function Releases(props) {
+function Development(props) {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {bcReleases.map(({ albumId, albumLink, title }) => {
-          return (
-            <Zapper>
-              <div
-                style={{ border: "0", width: "350px", height: "621px" }}
-                className="bg-white">
-                <BandcampPlayer
-                  albumId={albumId}
-                  albumLink={albumLink}
-                  title={title}
-                />
-              </div>
-            </Zapper>
-          );
-        })}
+        some work to do here :)
       </div>
     </div>
   );
 }
 
-export default Releases;
+export default Development;

@@ -15,17 +15,7 @@ function Sets(props) {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {videos.map((video, i) => {
-          return (
-            <Zapper>
-              <div
-                className="relative bg-white max-w-[400px] w-[100vw] md:w-[45vw] h-full"
-                key={video + i}>
-                <YoutubePlayer embedId={video} />
-              </div>
-            </Zapper>
-          );
-        })}
+        some work to do here :)
       </div>
     </div>
   );
