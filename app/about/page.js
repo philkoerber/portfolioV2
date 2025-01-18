@@ -20,7 +20,7 @@ const philippInfo = [
 
 function About(props) {
   return (
-    <div className="min-h-screen flex justify-center items-center p-8 py-20">
+    <div className="min-h-[80dvh] flex justify-center items-center p-8 py-20">
       <div className="flex flex-col gap-4 text-center items-center w-[550px]">
         {philippInfo.map((info) => {
           return (
