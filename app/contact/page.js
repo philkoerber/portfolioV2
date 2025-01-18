@@ -1,7 +1,7 @@
 import React from "react";
 import Zapper from "../utils/Zapper";
 import {
-  FaBandcamp,
+  FaGithub,
   FaInstagram,
   FaYoutubeSquare,
   FaLinkedin,
@@ -21,6 +21,11 @@ function Contact(props) {
       logo: <FaMailBulk />,
     },
     {
+      title: "Github",
+      link: "https://github.com/philkoerber",
+      logo: <FaGithub />,
+    },
+    {
       title: "YouTube",
       link: "https://www.youtube.com/@swim8008",
       logo: <FaYoutubeSquare />,
@@ -35,7 +40,7 @@ function Contact(props) {
   return (
     <div className="h-[100dvh] flex justify-center items-center flex-col gap-8">
       {socialLinks.map((social, index) => (
-        <Zapper>
+        <Zapper key={social + index}>
           <div className="flex gap-4 justify-center items-center">
             <div className="text-4xl">{social.logo}</div>
             <a

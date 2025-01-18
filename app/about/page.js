@@ -24,7 +24,7 @@ function About(props) {
       <div className="flex flex-col gap-4 text-center items-center w-[550px]">
         {philippInfo.map((info) => {
           return (
-            <Zapper>
+            <Zapper key={info}>
               <p className="text-sm">{info.title}:</p>
               <p className="text-lg">{info.info}</p>
             </Zapper>
