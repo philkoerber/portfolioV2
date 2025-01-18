@@ -33,7 +33,7 @@ function Contact(props) {
   ];
 
   return (
-    <div className="h-screen flex justify-center items-center flex-col gap-8">
+    <div className="h-[100dvh] flex justify-center items-center flex-col gap-8">
       {socialLinks.map((social, index) => (
         <Zapper>
           <div className="flex gap-4 justify-center items-center">

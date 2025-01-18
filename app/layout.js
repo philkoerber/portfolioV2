@@ -23,11 +23,11 @@ export default function RootLayout({ children }) {
           <Navigator />
         </div>
 
-        <div className="h-screen w-screen">
-          <div className="fixed w-screen h-screen z-0">
+        <div className="h-[100dvh] w-[100dvw]">
+          <div className="fixed w-[100dvw] h-[100dvh] z-0">
             <Graph />
           </div>
-          <div className="absolute z-100 text-white w-screen">{children}</div>
+          <div className="absolute z-100 text-white w-[100dvw]">{children}</div>
         </div>
       </body>
     </html>
