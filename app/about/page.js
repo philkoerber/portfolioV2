@@ -21,7 +21,7 @@ const philippInfo = [
 function About(props) {
   return (
     <div className="min-h-[100dvh] flex justify-center items-center p-8 py-20">
-      <div className="flex flex-col gap-4 text-center items-center w-[550px]">
+      <div className="flex flex-col gap-2 md:gap-4 text-center items-center w-[550px]">
         {philippInfo.map((info) => {
           return (
             <Zapper key={info}>
