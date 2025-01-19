@@ -54,9 +54,9 @@ const createCustomNode = (node) => {
 
   // Generate a random color
   const randomColor = new THREE.Color(
-    Math.random() * 0.15, // Red component
-    Math.random() * 0.15, // Green component
-    Math.random() * 0.5 // Blue component
+    Math.random() * 0.13, // Red component
+    Math.random() * 0.13, // Green component
+    Math.random() * 0.13 // Blue component
   );
 
   // Load your 3D model here
