@@ -18,7 +18,7 @@ const Projects = () => {
   ];
 
   return (
-    <div className="h-[100dvh] flex justify-center items-center flex-col gap-8">
+    <div className="h-full flex justify-center items-center flex-col gap-8">
       {navItems.map((item, index) => (
         <Zapper key={item.title + index}>
           <div className="flex gap-4 justify-center items-center">

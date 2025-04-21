@@ -48,7 +48,7 @@ const createCustomNode = (node) => {
     if (id === "about") {
       return "/human.glb";
     } else {
-      return "/synthesizer.glb";
+      return "";
     }
   };
 
@@ -112,6 +112,7 @@ const createCustomNode = (node) => {
 };
 
 function Graph(props) {
+
   const pathname = usePathname();
   const fgRef = useRef();
   const [windowSize, setWindowSize] = useState({
@@ -160,11 +161,14 @@ function Graph(props) {
       (node) => node.id === pathname.slice(1)
     );
 
+    console.log(nodeToFocus)
+
     if (nodeToFocus) {
       setTimeout(() => {
         handleClick(nodeToFocus);
       }, 100);
     }
+
   }, [pathname]);
 
   return (

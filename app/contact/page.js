@@ -2,10 +2,9 @@ import React from "react";
 import Zapper from "../utils/Zapper";
 import {
   FaGithub,
-  FaInstagram,
-  FaYoutubeSquare,
   FaLinkedin,
   FaMailBulk,
+  FaTwitch,
 } from "react-icons/fa";
 
 function Contact(props) {
@@ -26,19 +25,14 @@ function Contact(props) {
       logo: <FaGithub />,
     },
     {
-      title: "YouTube",
-      link: "https://www.youtube.com/@swim8008",
-      logo: <FaYoutubeSquare />,
-    },
-    {
-      title: "Instagram",
-      link: "https://www.instagram.com/philipp.koerber/",
-      logo: <FaInstagram />,
+      title: "Twitch",
+      link: "https://www.twitch.tv/sswwiimmtv",
+      logo: <FaTwitch />,
     },
   ];
 
   return (
-    <div className="h-[100dvh] flex justify-center items-center flex-col gap-8">
+    <div className="h-full flex justify-center items-center flex-col gap-8">
       {socialLinks.map((social, index) => (
         <Zapper key={social + index}>
           <div className="flex gap-4 justify-center items-center">

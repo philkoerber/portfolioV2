@@ -4,7 +4,7 @@ import { FaHandPointer } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <main className="flex h-[100dvh] flex-col items-center justify-center text-4xl p-24">
+    <main className="flex h-full flex-col items-center justify-center text-4xl p-24">
       <Zapper>
         <Link href={"/about"} className="">
           <div className="relative">
