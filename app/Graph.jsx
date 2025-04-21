@@ -121,7 +121,7 @@ function Graph(props) {
   });
 
   useEffect(() => {
-    fgRef.current.scene().background = new THREE.Color("#FF858D");
+    fgRef.current.scene().background = new THREE.Color("#EFA9B4");
     //window resize logic
     const handleResize = () => {
       setWindowSize({

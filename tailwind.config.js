@@ -1,4 +1,9 @@
 /** @type {import('tailwindcss').Config} */
+
+//https://coolors.co/31212A-EFA9B4-fcebda
+
+
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -13,8 +18,8 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        verydark: "#3E2A35",
-        backgroundone: "#FF858D",
+        verydark: "#31212A",
+        backgroundone: "#EFA9B4",
         antique: "#FCEBDA"
       }
     },
