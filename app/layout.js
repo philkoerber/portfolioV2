@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           <div className="fixed w-[100dvw] h-[100dvh] z-0">
             <Graph />
           </div>
-          <div className="absolute z-100 text-white w-[100dvw]">{children}</div>
+          <div className="absolute z-100 text-verydark w-[100dvw]">{children}</div>
         </div>
       </body>
     </html>

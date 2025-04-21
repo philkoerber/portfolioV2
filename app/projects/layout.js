@@ -6,15 +6,15 @@ const navItemStyles = "hover:underline transition duration-200";
 function layout({ children }) {
   return (
     <div className="relative">
-      <ul className="w-full flex justify-center mt-12 text-lg gap-12 md:gap-14 lg:gap-16 absolute z-50">
+      <ul className="w-full flex justify-center mt-12 text-lg gap-12 md:gap-14 lg:gap-16 absolute z-50 text-antique">
         <Zapper>
           <li className={navItemStyles}>
-            <Link href="/projects/development">Coding & Apps</Link>
+            <Link href="/projects/web">Web Applications</Link>
           </li>
         </Zapper>
         <Zapper>
           <li className={navItemStyles}>
-            <Link href="/projects/music">Music & Instruments</Link>
+            <Link href="/projects/trading">Trading</Link>
           </li>
         </Zapper>
       </ul>

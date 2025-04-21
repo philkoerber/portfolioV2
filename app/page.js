@@ -8,9 +8,15 @@ export default function Home() {
       <Zapper>
         <Link href={"/about"} className="">
           <div className="relative">
-            <img src="./pk.svg" className="invert" />
-            <FaHandPointer className="right-0 bottom-0 absolute w-[90px] h-[90px]" />
-          </div>
+            <img src="./pk.svg" className="invert sepia opacity-95" />
+            <FaHandPointer
+              className="right-0 bottom-0 absolute w-[6vw] h-[6vw] text-antique animate-pulse"
+              style={{
+                animationDuration: "0.9s",
+                animationTimingFunction: "ease-in-out",
+                animationIterationCount: "infinite",
+              }}
+            />          </div>
         </Link>
       </Zapper>
     </main>

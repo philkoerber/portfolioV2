@@ -1,11 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Zapper from "./utils/Zapper";
-const navItemStyles = "hover:underline transition duration-200";
+
+const navItemStyles = "hover:underline transition duration-200 text-antique";
+
 function Navigator() {
   return (
     <nav className="w-full absolute z-50 text-lg md:text-xl lg:text-2xl p-4">
-      <ul className="w-full flex justify-center items-center gap-12 md:gap-14 lg:gap-16 text-white ">
+      <ul className="w-full flex justify-center items-center gap-12 md:gap-14 lg:gap-16 text-antique ">
         <Zapper>
           <li className={navItemStyles}>
             <Link href="/about">About</Link>

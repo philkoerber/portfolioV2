@@ -16,8 +16,8 @@ const data = {
     { id: "contact" },
     { id: "projects" },
     //sub
-    { id: "projects/music" },
-    { id: "projects/development" },
+    { id: "projects/web" },
+    { id: "projects/trading" },
   ],
   links: [
     //main
@@ -25,25 +25,25 @@ const data = {
     { source: "contact", target: "home", value: 4 },
     { source: "projects", target: "home", value: 2 },
     //sub
-    { source: "projects", target: "projects/development", value: 2 },
-    { source: "projects", target: "projects/music", value: 3 },
+    { source: "projects", target: "projects/web", value: 2 },
+    { source: "projects", target: "projects/trading", value: 3 },
   ],
 };
 const createCustomNode = (node) => {
   const group = new THREE.Group();
 
   const getModelById = (id) => {
-    if (id === "projects/development") {
+    if (id === "projects/web") {
       return "/laptop.glb";
     }
     if (id === "projects") {
-      return "/speaker.glb";
+      return "/hammer.glb";
     }
     if (id === "contact") {
-      return "/laptop.glb";
+      return "/telephone.glb";
     }
-    if (id === "projects/music") {
-      return "/camera.glb";
+    if (id === "projects/trading") {
+      return "/chart.glb";
     }
     if (id === "about") {
       return "/human.glb";
@@ -53,11 +53,7 @@ const createCustomNode = (node) => {
   };
 
   // Generate a random color
-  const randomColor = new THREE.Color(
-    Math.random() * 0.13, // Red component
-    Math.random() * 0.13, // Green component
-    Math.random() * 0.13 // Blue component
-  );
+  const baseColor = new THREE.Color("#F9DBBD");
 
   // Load your 3D model here
   const loader = new GLTFLoader();
@@ -68,7 +64,7 @@ const createCustomNode = (node) => {
         // Create a new material with the random color and standard shading
         const material = new THREE.MeshToonMaterial({
           wireframe: true,
-          color: randomColor,
+          color: baseColor,
         });
 
         // Assign the new material to the mesh
@@ -81,13 +77,22 @@ const createCustomNode = (node) => {
 
     // You can customize the position, rotation, and scale of the model here
     gltf.scene.position.set(0, 0, 0);
-    gltf.scene.scale.set(1, 1, 1);
+    const targetSize = 5;
+
+    const box = new THREE.Box3().setFromObject(gltf.scene);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+
+    const maxDimension = Math.max(size.x, size.y, size.z);
+    const scale = targetSize / maxDimension;
+
+    gltf.scene.scale.setScalar(scale);
     gltf.scene.rotation.set(0, 0, 0);
 
     const randomRotation = {
-      x: Math.random() * 0.003 + 0.004,
-      y: Math.random() * 0.003 + 0.004,
-      z: Math.random() * 0.003 + 0.004,
+      x: Math.random() * 0.002 + 0.003,
+      y: Math.random() * 0.002 + 0.003,
+      z: Math.random() * 0.002 + 0.003,
     };
 
     const rotateNode = () => {
@@ -115,6 +120,7 @@ function Graph(props) {
   });
 
   useEffect(() => {
+    fgRef.current.scene().background = new THREE.Color("#FF858D");
     //window resize logic
     const handleResize = () => {
       setWindowSize({

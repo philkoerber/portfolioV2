@@ -1,19 +1,19 @@
 import React from "react";
 import Zapper from "../utils/Zapper";
 import Link from "next/link";
-import { FaCode, FaGuitar } from "react-icons/fa";
+import { FaChartBar, FaCode, FaGuitar } from "react-icons/fa";
 
 const Projects = () => {
   const navItems = [
     {
-      title: "Coding & Apps",
-      link: "/projects/development",
+      title: "Web Applications",
+      link: "/projects/web",
       icon: <FaCode />,
     },
     {
-      title: "Music & Instruments",
-      link: "/projects/music",
-      icon: <FaGuitar />,
+      title: "Trading",
+      link: "/projects/trading",
+      icon: <FaChartBar />,
     },
   ];
 
@@ -25,7 +25,7 @@ const Projects = () => {
             <div className="text-4xl">{item.icon}</div>
             <Link
               href={item.link}
-              className="text-white hover:underline text-lg"
+              className="hover:underline text-lg"
             >
               {item.title}
             </Link>

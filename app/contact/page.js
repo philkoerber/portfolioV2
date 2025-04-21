@@ -48,7 +48,7 @@ function Contact(props) {
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:underline text-lg"
+              className="hover:underline text-lg"
             >
               {social.title}
             </a>
