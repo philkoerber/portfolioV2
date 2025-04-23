@@ -53,7 +53,7 @@ const createCustomNode = (node) => {
   };
 
   // Generate a random color
-  const baseColor = new THREE.Color("#F9DBBD");
+  const baseColor = new THREE.Color("#E9D5C4");
 
   // Load your 3D model here
   const loader = new GLTFLoader();
@@ -121,7 +121,7 @@ function Graph(props) {
   });
 
   useEffect(() => {
-    fgRef.current.scene().background = new THREE.Color("#F9D6B4");
+    fgRef.current.scene().background = new THREE.Color("#62B6CB");
     //window resize logic
     const handleResize = () => {
       setWindowSize({

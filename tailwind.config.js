@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-//https://coolors.co/31212A-EFA9B4-fcebda
+//https://coolors.co/211c1f-62b6cb-eedfd2
 
 
 
