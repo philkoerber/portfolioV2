@@ -6,7 +6,7 @@ const projects = [
     title: "Soulscript.Cards",
     subtitle: "AI-powered, monetized Tarot-App",
     description:
-      "A simple weather forecast app that shows current and future weather using a clean UI.",
+      "A daily tarot card app with animated draws and AI-powered card meanings, built for smooth static delivery and social sharing. Monetized with Google AdSense.",
     stack: ["Next.js", "Supabase", "OpenAI", "framer-motion", "Google AdSense"],
     video: "https://www.youtube.com/embed/3jZ5vnv-LZc",
     url: "https://soulscript.cards",
@@ -15,7 +15,7 @@ const projects = [
     title: "sswwiimm-Randomizer",
     subtitle: "Create a really weird Pokémon Red ROM and play it in the browser",
     description:
-      "The usual Pokémon Randomizer were not crazy enough, so i created my own. Exchange all Pokémon with the infamous 'Missingno.'. When a ROM is created, play a Emulation of the GameBoy directly in the App.",
+      "The usual Pokémon randomizers weren’t chaotic enough—so I built my own. Every Pokémon is replaced with the infamous Missingno. When a ROM is generated, the app lets you play it instantly via an embedded GameBoy emulator.",
     stack: ["Next.js", "Reverse Engineering", "Web Assembly"],
     video: "https://www.youtube.com/embed/bYb5IS7yWrY",
     url: "https://your-crypto-tracker.com",
