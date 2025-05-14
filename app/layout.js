@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="overflow-x-hidden">
-      <body className={`${space.className} text-verydark`}>
+      <body className={`${space.className} text-antique`}>
         {/* Graph background layer */}
         <div className="fixed inset-0 -z-10">
           <Graph />
