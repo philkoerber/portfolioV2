@@ -4,32 +4,64 @@ import Zapper from "@/app/utils/Zapper";
 const projects = [
   {
     title: "Soulscript.Cards",
-    subtitle: "AI-powered, monetized Tarot-App",
+    subtitle: "AI-powered, monetized Tarot App",
     description:
-      "A daily tarot card app with animated draws and AI-powered card meanings, built for smooth static delivery and social sharing. Monetized with Google AdSense.",
-    stack: ["Next.js", "Supabase", "OpenAI", "framer-motion", "Google AdSense"],
+      "A daily tarot app featuring animated card draws and AI-generated meanings. Built for fast static delivery and optimized for sharing on social media.",
+    stack: ["Next.js", "Supabase", "OpenAI", "framer-motion"],
     video: "https://www.youtube.com/embed/3jZ5vnv-LZc",
     url: "https://soulscript.cards",
   },
   {
     title: "sswwiimm-Randomizer",
-    subtitle: "Create a really weird Pokémon Red ROM and play it in the browser",
+    subtitle: "Create a totally glitched Pokémon Red ROM and play it in the browser",
     description:
-      "The usual Pokémon randomizers weren’t chaotic enough—so I built my own. Every Pokémon is replaced with the infamous Missingno. When a ROM is generated, the app lets you play it instantly via an embedded GameBoy emulator.",
+      "Standard Pokémon randomizers were too tame—so I made my own. Every Pokémon is replaced with Missingno. Once generated, the ROM can be played instantly in an embedded GameBoy emulator.",
     stack: ["Next.js", "Reverse Engineering", "Web Assembly"],
     video: "https://www.youtube.com/embed/bYb5IS7yWrY",
     url: "https://sswwiimm-randomizer.vercel.app/",
   },
   {
-    title: "No Tide '93",
-    subtitle: "Satisfying, athmospheric Dolphin-swimming with Babylon.js engine",
+    title: "Sixty Six",
+    subtitle: "Classic German card game in a cozy web app",
     description:
-      "My personal portfolio built with React, showcasing my projects, resume, and blog.",
-    stack: ["Next.js", "Babylon.js", "OpenAI", "Google AdSense"],
+      "One of my earliest web projects. Play 'Sechsundsechzig,' the traditional German card game, against a computer opponent in a minimal, satisfying interface.",
+    stack: ["React", "framer-motion"],
+    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
+    url: "https://sixty-six.netlify.app/",
+  },
+  {
+    title: "Chess Opening Name Explorer",
+    subtitle: "Discover over 12,000 chess openings by name",
+    description:
+      "Ever heard of the 'Fried Liver Attack'? Explore thousands of chess openings and their quirky names in this searchable, animated React app.",
+    stack: ["React", "framer-motion"],
+    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
+    url: "https://openingnameexplorer.netlify.app/",
+  },
+  {
+    title: "No Tide '93",
+    subtitle: "Atmospheric dolphin exploration in Babylon.js",
+    description:
+      "A dreamy exploration game that dives into procedural worldbuilding and retro 3D aesthetics, all within a Babylon.js environment.",
+    stack: ["Next.js", "Babylon.js"],
     video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://notide93.vercel.app/",
   },
+  {
+    title: "Portfolio",
+    subtitle: "Interactive 3D portfolio with force-graph background",
+    description:
+      "My personal portfolio built with Next.js, featuring a dynamic 3D background and showcasing my work, resume, and contact links.",
+    stack: ["Next.js", "force-graph-3d", "Tailwind"],
+    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
+    url: "https://philippkoerber.com/",
+  },
+  
 ];
+
+
+
+
 function Web(props) {
   return (
     <div className="flex justify-center p-8">
