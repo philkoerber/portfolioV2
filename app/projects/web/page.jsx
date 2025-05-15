@@ -29,6 +29,7 @@ const projects = [
     video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://sixty-six.netlify.app/",
   },
+  
   {
     title: "Chess Opening Name Explorer",
     subtitle: "Discover over 12,000 chess openings by name",
@@ -42,7 +43,7 @@ const projects = [
     title: "No Tide '93",
     subtitle: "Atmospheric dolphin exploration in Babylon.js",
     description:
-      "A dreamy exploration game that dives into procedural worldbuilding and retro 3D aesthetics, all within a Babylon.js environment.",
+      "Procedural worldbuilding and retro 3D aesthetics, all within a Babylon.js environment.",
     stack: ["Next.js", "Babylon.js"],
     video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://notide93.vercel.app/",
@@ -65,13 +66,10 @@ const projects = [
 function Web(props) {
   return (
     <div className="flex justify-center p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-7xl space-y-6">
         {projects.map((project, i) => (
-          <Zapper>
-            <div
-              key={i}
-              className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30"
-            >
+          <Zapper key={i}>
+            <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30 break-inside-avoid">
               <h2 className="text-2xl font-bold mb-1">{project.title}</h2>
               <h3 className="text-lg font-semibold mb-2">{project.subtitle}</h3>
               <p className="text-sm mb-4 opacity-80">{project.description}</p>
@@ -97,7 +95,7 @@ function Web(props) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 right-0 inline-block bg-antique text-verydark text-sm font-semibold px-4 py-2 hover:bg-antique/80 transition duration-200 shadow-md"
+                className="mt-4 inline-block bg-antique text-verydark text-sm font-semibold px-4 py-2 hover:bg-antique/80 transition duration-200 shadow-md"
               >
                 Visit {project.title} →
               </a>
