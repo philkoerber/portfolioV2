@@ -26,7 +26,6 @@ const projects = [
     description:
       "One of my earliest web projects. Play 'Sechsundsechzig,' the traditional German card game, against a computer opponent in a minimal, satisfying interface.",
     stack: ["React", "framer-motion"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://sixty-six.netlify.app/",
   },
   
@@ -36,7 +35,6 @@ const projects = [
     description:
       "Ever heard of the 'Fried Liver Attack'? Explore thousands of chess openings and their quirky names in this searchable, animated React app.",
     stack: ["React", "framer-motion"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://openingnameexplorer.netlify.app/",
   },
   {
@@ -45,7 +43,6 @@ const projects = [
     description:
       "Procedural worldbuilding and retro 3D aesthetics, all within a Babylon.js environment.",
     stack: ["Next.js", "Babylon.js"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://notide93.vercel.app/",
   },
   {
@@ -83,6 +80,7 @@ function Web(props) {
                   </span>
                 ))}
               </div>
+              {project.video && 
               <div className="aspect-video w-full overflow-hidden border border-antique/20">
                 <iframe
                   className="w-full h-full"
@@ -90,7 +88,8 @@ function Web(props) {
                   title={project.title}
                   allowFullScreen
                 ></iframe>
-              </div>
+              </div>}
+              
               <a
                 href={project.url}
                 target="_blank"
