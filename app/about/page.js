@@ -6,7 +6,7 @@ const philippInfo = [
   { title: "Job", info: "Web Developer" },
   {
     title: "Background",
-    info: "Trained as an organ builder, traveled extensively in my twenties, now a dedicated developer.",
+    info: "Trained as an organ builder, traveled in my twenties, now a dedicated developer.",
   },
   {
     title: "Work",
@@ -14,7 +14,7 @@ const philippInfo = [
   },
   {
     title: "Freetime",
-    info: "Building a Tarot SaaS, developing an AI trading bot, crafting instruments, and making music.",
+    info: "Building apps, developing AI trading bots, streaming all kind of stuff on twitch.",
   },
 ];
 
