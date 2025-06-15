@@ -17,7 +17,7 @@ const projects = [
     description:
       "Standard Pokémon randomizers were too tame—so I made my own. Every Pokémon is replaced with Missingno. Once generated, the ROM can be played instantly in an embedded GameBoy emulator.",
     stack: ["Next.js", "Reverse Engineering", "Web Assembly"],
-    video: "https://www.youtube.com/embed/bYb5IS7yWrY",
+    video: "https://www.youtube.com/embed/O2nD17hzeQA?si=61NhcPxVSOCEBVJA",
     url: "https://sswwiimm-randomizer.vercel.app/",
   },
   {
@@ -26,17 +26,15 @@ const projects = [
     description:
       "One of my earliest web projects. Play 'Sechsundsechzig,' the traditional German card game, against a computer opponent in a minimal, satisfying interface.",
     stack: ["React", "framer-motion"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://sixty-six.netlify.app/",
   },
-  
+
   {
     title: "Chess Opening Name Explorer",
     subtitle: "Discover over 12,000 chess openings by name",
     description:
       "Ever heard of the 'Fried Liver Attack'? Explore thousands of chess openings and their quirky names in this searchable, animated React app.",
     stack: ["React", "framer-motion"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://openingnameexplorer.netlify.app/",
   },
   {
@@ -45,7 +43,6 @@ const projects = [
     description:
       "Procedural worldbuilding and retro 3D aesthetics, all within a Babylon.js environment.",
     stack: ["Next.js", "Babylon.js"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
     url: "https://notide93.vercel.app/",
   },
   {
@@ -54,10 +51,10 @@ const projects = [
     description:
       "My personal portfolio built with Next.js, featuring a dynamic 3D background and showcasing my work, resume, and contact links.",
     stack: ["Next.js", "force-graph-3d", "Tailwind"],
-    video: "https://www.youtube.com/embed/_gfKBB2rZzA",
+    video: "https://www.youtube.com/embed/Z6vNTiXib1A?si=zN6eAeU5daPnOf4X",
     url: "https://philippkoerber.com/",
   },
-  
+
 ];
 
 
@@ -83,14 +80,15 @@ function Web(props) {
                   </span>
                 ))}
               </div>
-              <div className="aspect-video w-full overflow-hidden border border-antique/20">
-                <iframe
-                  className="w-full h-full"
-                  src={project.video}
-                  title={project.title}
-                  allowFullScreen
-                ></iframe>
-              </div>
+              {project.video &&
+                <div className="aspect-video w-full overflow-hidden border border-antique/20">
+                  <iframe
+                    className="w-full h-full"
+                    src={project.video}
+                    title={project.title}
+                    allowFullScreen
+                  ></iframe>
+                </div>}
               <a
                 href={project.url}
                 target="_blank"
