@@ -43,10 +43,10 @@ const projects = [
   },
   {
     title: "BellmanBot",
-    subtitle: "Realtime AI Task Runner",
+    subtitle: "Realtime AI Trading Bot Runner",
     description:
-      "A full-stack app with a real-time pipeline: the frontend (Next.js) sends user inputs to a Flask backend, which processes long-running AI tasks using Celery. Socket.IO streams live status updates and final results back to the client. Built for performance, stability, and UX clarity. Run everything in a Docker for independence.",
-    stack: ["Python", "Nextjs", "Docker", "Flask", "Celery"],
+      "A full-stack system for running deep learning–based trading bots. Users launch jobs from a Next.js frontend, which are processed by a Flask + Celery backend. Real-time status updates are streamed via Socket.IO. Models use TensorFlow and run in isolated Docker containers for stability and repeatability. Designed for experimentation with live telemetry and minimal friction.",
+    stack: ["Python", "TensorFlow", "Next.js", "Docker",],
     github: "https://github.com/philkoerber/bellmanbot",
   },
   {
@@ -69,7 +69,7 @@ function Web() {
           <Zapper key={i}>
             <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30 break-inside-avoid">
               <h2 className="text-2xl font-bold mb-1">{project.title}</h2>
-              <h3 className="text-lg font-semibold mb-2">{project.subtitle}</h3>
+              <h3 className="text-sm font-semibold mb-2">{project.subtitle}</h3>
               <p className="text-sm mb-4 opacity-80">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.stack.map((tech, j) => (
@@ -97,7 +97,7 @@ function Web() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-verydark text-white text-sm font-semibold px-4 py-2 hover:bg-gray-700 transition duration-200 shadow-md w-full flex items-center justify-center gap-2"
+                    className="bg-verydark text-white text-sm font-semibold px-4 py-2 hover:bg-verydark/50 transition duration-200 shadow-md w-full flex items-center justify-center gap-2"
                   >
                     <FaGithub className="w-4 h-4" />
                     View on GitHub

@@ -1,168 +1,238 @@
 import React from 'react';
 import Zapper from '@/app/utils/Zapper';
+import { FaExternalLinkAlt } from "react-icons/fa";
 
-// quick tech tags shown as pills at the top
-const tags = ['QuantConnect', 'Python', 'TensorFlow', 'Sklearn', 'Pandas', 'Kelly Sizing'];
 
-export default function Trading() {
+/* quick tech pills */
+const tags = [
+  'QuantConnect', 'Python', 'RSI', 'SMA-50/200',
+  'ATR Stops', 'ETFs'
+];
+
+export default function EtfRsiMaV5Page() {
   return (
     <div className="flex justify-center p-8">
       <div className="flex flex-col gap-6 w-full max-w-3xl">
 
-        {/* ───────────────── Overview */}
+        {/* ───────────────── 1 · Overview */}
         <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h2 className="text-2xl font-bold mb-1">Intraday Walk‑Forward Trading Bot</h2>
-            <h3 className="text-lg font-semibold mb-2">Self‑retraining MLP on AAPL minute data</h3>
-            <p className="text-sm mb-4 opacity-80">
-              A single‑file algorithm (<code>main.py</code>) designed for <strong>QuantConnect</strong>. It rolls a 60‑day
-              window every Sunday night, retrains a tiny MLP under focal loss, and then
-              trades Monday–Friday using half‑Kelly sizing clipped to&nbsp;50&nbsp;% gross exposure. Daily
-              equity is guarded by a –0.5&nbsp;% stop to keep tail‑risk civilised.
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h1 className="text-2xl font-bold mb-1">
+              Daily ETF RSI-MA Bot <span className="text-antique/70">v5</span>
+            </h1>
+            <h2 className="text-lg font-semibold mb-2">
+              Hourly swing-trader with momentum fallback
+            </h2>
+            <p className="text-sm opacity-80 mb-4">
+              Scans the&nbsp;20 most-liquid US ETFs each hour, buys when&nbsp;
+              <em>RSI rebounds from oversold</em> and the 50-hour MA sits above the&nbsp;200-hour MA.
+              If nothing is oversold, it falls back to a simple
+              30-day momentum rank so it never stands idle.
+              Risk is allocated by inverse&nbsp;ATR and capped at&nbsp;2&nbsp;× gross exposure.
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
               {tags.map(t => (
-                <span key={t} className="bg-antique text-verydark text-xs px-2 py-1 rounded-full">#{t}</span>
+                <span key={t}
+                  className="bg-antique text-verydark text-xs px-2 py-1 rounded-full">
+                  #{t}
+                </span>
               ))}
             </div>
             <div className="aspect-video w-full overflow-hidden border border-antique/20 mb-4">
-              <img src="/images/bot-equity-curve-placeholder.png" alt="Equity curve placeholder" className="w-full h-full object-cover" />
+              <img
+                src="/chart.png"
+                alt="Equity curve"
+                className="w-full h-full"
+              />
             </div>
+
+
             <a
-              href="https://www.quantconnect.com/"
+              href={"https://www.quantconnect.com/"}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-antique text-verydark text-sm font-semibold px-4 py-2 hover:bg-antique/80 transition duration-200 shadow-md"
+              className="flex items-center justify-center gap-2 text-center bg-antique text-verydark text-sm font-semibold px-4 py-2 hover:bg-antique/80 transition duration-200 shadow-md w-full"
             >
-              View on QuantConnect →
+              Quantconnect.com
+              <FaExternalLinkAlt className="w-3 h-3" />
             </a>
-          </div>
+          </section>
         </Zapper>
 
-        {/* ───────────────── Why walk‑forward? */}
+        {/* ───────────────── 2 · Key parameters */}
         <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Why&nbsp;Walk‑Forward Retraining?</h3>
-            <ul className="list-disc list-inside text-sm space-y-2 opacity-80">
-              <li><strong>Non‑stationarity:</strong> minute‑level order‑flow drifts week to week; static models stale out fast.</li>
-              <li><strong>GPU‑less speed:</strong> the tiny MLP (+ scaler) retrains in &lt; 2 s on QC’s free CPU tier.</li>
-              <li><strong>Fresh risk metrics:</strong> weekly re‑fit rescales <code>StandardScaler</code> so ATR, RSI slopes, and time‑of‑day sinusoids stay centred.</li>
-              <li><strong>Straightforward deployment:</strong> avoiding offline pipelines means <em>one</em> artifact bundle (<code>.keras</code> + scaler npy) checked into QC storage.</li>
-            </ul>
-          </div>
-        </Zapper>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Core Parameters</h3>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto">
+              {`# look-back & thresholds
+rsiPeriod        = 14
+fastPeriod, slowPeriod = 50, 200   # hourly SMA trend filter
+oversold, overbought   = 30, 70
 
-        {/* ───────────────── Feature engineering */}
-        <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Feature Engineering</h3>
-            <p className="text-sm mb-4 opacity-80">
-              Five categories stitched into a <code>float32</code> vector:
-            </p>
-            <ul className="list-disc list-inside text-sm space-y-2 opacity-80">
-              <li><strong>Past returns:</strong> 5‑bar micro‑momentum signal.</li>
-              <li><strong>RSI slope:</strong> short‑term momentum acceleration.</li>
-              <li><strong>Normalized ATR:</strong> dollar volatility / price ⇒ forecasts stable across regimes.</li>
-              <li><strong>Daily z‑score:</strong> mean‑reversion anchor vs 2‑day intraday drift.</li>
-              <li><strong>Time‑of‑day sin/cos:</strong> captures lunch‑time chop vs open/close frenzy without categorical edges.</li>
-            </ul>
-            <div className="aspect-video w-full overflow-hidden border border-antique/20 mt-4">
-              <img src="/images/bot-feature-imp-placeholder.png" alt="Feature importance placeholder" className="w-full h-full object-cover" />
-            </div>
-          </div>
-        </Zapper>
-
-        {/* ───────────────── Training pipeline code */}
-        <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Training Pipeline</h3>
-            <pre className="bg-verydark text-antique text-xs p-4 overflow-x-auto leading-relaxed">
-{`# Sunday 20:00 ET cron
-history = self.History(self.symbol, WINDOW_DAYS, Resolution.Minute)
-# → engineer RSI/ATR, z‑score, sincos, returns
-X, y = build_samples(history)
-
-X_train, X_test = chrono_split(X, y, 0.8)
-scaler = StandardScaler().fit(X_train)
-X_train = scaler.transform(X_train)
-
-model = tf.keras.Sequential([
-    Dense(32, 'relu'), Dense(8, 'relu'), Dense(1, 'sigmoid')])
-model.compile('adam', loss=focal_loss, metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=10, batch_size=512,
-          validation_split=0.1, callbacks=[EarlyStopping(patience=3)])`}
+# risk & exits
+stopATR  = 1.5      # initial stop
+trailATR = 1.5      # trailing once in profit
+holdMaxHrs, earlyExitHrs = 48, 32
+earlyExitATR = 0.5   # bail if no progress
+targetExposure = 2.0 # 2× gross cap`}
             </pre>
             <p className="text-xs opacity-70 mt-2">
-              <em>Why focal loss?</em> — balances the skewed 52/48 up/down ratio better than BCE, boosting recall on
-              rare fast drops.
+              These numbers aim for frequent trades but shallow risk—
+              a 1½ × ATR stop is tight on purpose to keep max drawdown low.
             </p>
-          </div>
+          </section>
         </Zapper>
 
-        {/* ───────────────── Risk Management */}
+        {/* ───────────────── 3 · Universe picker */}
         <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Risk Management & Sizing</h3>
-            <p className="text-sm mb-4 opacity-80">
-              Position size ↔ prediction edge: <code>half‑Kelly × 1 % risk / (ATR/$)</code>. Capped at 50 % gross and liquidates when
-              daily P/L pierces −0.5 %.
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Universe → keep it liquid</h3>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto">
+              {`def CoarseSelection(self, coarse):
+    liquid = [c for c in coarse
+              if c.Symbol.Value in self.etfCandidates
+              and c.DollarVolume > 25e6]           # ≥ $25 M / day
+    return [c.Symbol for c in sorted(liquid,
+                                     key=lambda x: x.DollarVolume,
+                                     reverse=True)[:30]]`}
+            </pre>
+            <p className="text-xs opacity-70 mt-2">
+              Anything thinner than&nbsp;$25 M daily volume is skipped to
+              avoid sloppy spreads and halts.
             </p>
-            <pre className="bg-verydark text-antique text-xs p-4 overflow-x-auto leading-relaxed">
-{`edge       = prob_up - 0.5  # ±0.5 → 100 % confidence
-risk_unit  = 0.01            # 1 % of equity
-frac_kelly = 0.5 * edge      # half‑Kelly
-stake_raw  = frac_kelly * risk_unit / (ATR$/Close$)
+          </section>
+        </Zapper>
 
-self.SetHoldings('AAPL', clip(stake_raw, -0.5, 0.5))`}
+        {/* ───────────────── 4 · Regime filter */}
+        <Zapper>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Risk-On Regime Check</h3>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto">
+              {`self.spyFast = self.SMA('SPY', 50, Resolution.Hour)
+self.spySlow = self.SMA('SPY', 200, Resolution.Hour)
+
+riskOn = self.spyFast.Current.Value > self.spySlow.Current.Value`}
+            </pre>
+            <p className="text-xs opacity-70 mt-2">
+              The bot only opens new trades when SPY’s short MA is above its
+              long MA—keeps it out of bear swoons.
+            </p>
+          </section>
+        </Zapper>
+
+        {/* ───────────────── 5 · Entry logic */}
+        <Zapper>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Entry: RSI swing-reversal</h3>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto">
+              {`longSetup = (rsi < 30) and (rsi > prevRsi)        # ticking up
+trendUp   = sma50 > sma200
+if riskOn and longSetup and trendUp:
+    self.SetHoldings(sym, +weight)`}
             </pre>
             <ul className="list-disc list-inside text-sm space-y-1 opacity-80 mt-2">
-              <li>Skip first 5 and last 30 minutes: avoid open/close gapping.</li>
-              <li>Liquidate on <code>abs(edge) &lt; 0.15</code> ⇒ reduces churn in noise.</li>
+              <li>Mirror logic for shorts when <code>RSI&nbsp;&gt;&nbsp;70</code> plus down-trend.</li>
+              <li>If no ETF is oversold/overbought, the bot looks at price
+                momentum over the past 30×7 bars:</li>
             </ul>
-          </div>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto mt-2">
+              {`hist = self.History(sym, 210, Resolution.Hour)
+momentum = (price - hist.close.iloc[0]) / hist.close.iloc[0]`}
+            </pre>
+          </section>
         </Zapper>
 
-        {/* ───────────────── Live loop */}
+        {/* ───────────────── 6 · Position sizing */}
         <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Live Execution Loop</h3>
-            <p className="text-sm mb-4 opacity-80">
-              Predictions throttled every 5 minutes to align with feature horizon and cut QC data costs. Public logs show edge, target, and realised
-              P/L per tick:
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Sizing: inverse-ATR</h3>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto">
+              {`invVol[sym] = 1 / atrValue
+w = invVol[sym] / Σ(invVol) * targetExposure   # <= 2× gross`}
+            </pre>
+            <p className="text-xs opacity-70 mt-2">
+              Quiet ETFs (low ATR) get bigger weights; choppy ones get trimmed so
+              each position risks roughly the same euro amount.
             </p>
-            <div className="aspect-video w-full overflow-hidden border border-antique/20 mb-3">
-              <img src="/images/bot-logs-placeholder.png" alt="Live logs placeholder" className="w-full h-full object-cover" />
+          </section>
+        </Zapper>
+
+        {/* ───────────────── 7 · Exit & trailing stops */}
+        <Zapper>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Exit rules</h3>
+            <pre className="bg-verydark text-antique text-xs p-4 leading-relaxed overflow-x-auto">
+              {`stop  = entry - 1.5 * ATR
+trail = price - 1.5 * ATR   # only ratchets higher
+if heldHrs >= 32 and price < entry + 0.5 * ATR:
+    self.Liquidate(sym)     # early exit (no progress)
+if heldHrs >= 48:
+    self.Liquidate(sym)     # hard time-stop`}
+            </pre>
+            <p className="text-xs opacity-70 mt-2">
+              Stops trail by the same ATR multiple to keep risk constant as a trade moves.
+            </p>
+          </section>
+        </Zapper>
+
+        {/* ───────────────── 8 · Live blotter / flow-chart */}
+        <Zapper>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">How one hour flows</h3>
+            <div className="aspect-video w-full overflow-hidden border border-antique/20 mb-4">
+              <img
+                src="/log.png"
+                alt="logs"
+                className="w-full h-full"
+              />
             </div>
             <p className="text-xs opacity-70">
-              <em>Debug tip:</em> dumping <code>self.Debug()</code> into QC logs throttles after 10 MB; switched to <code>Log.py</code> to persist detailed telemetry to AWS.
+              Every hour: update indicators → score momentum →
+              size positions → log to QC.
             </p>
-          </div>
+          </section>
         </Zapper>
 
-        {/* ───────────────── Lessons */}
+        {/* ───────────────── 9 · Performance detail */}
         <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Lessons Learned</h3>
-            <ul className="list-disc list-inside text-sm space-y-2 opacity-80">
-              <li>MLP beats LSTM here: latency 1ms vs 20ms with no accuracy loss 🤯.</li>
-              <li>RSI slope raw RSI; derivative captures tempo, not stretched scale.</li>
-              <li>ATR normalisation makes Kelly sizing regime‑agnostic (½ June ’24 memestock volume ≠ August ’24 dog days).</li>
-              <li>Walk‑forward makes backtest metrics noisy; use PSR (Probabilistic Sharpe Ratio) with bootstraps rather than mean Sharpe.</li>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Back-test detail</h3>
+            <ul className="list-disc list-inside text-sm space-y-1 opacity-80">
+              <li><strong>Win rate:</strong> 47 %</li>
+              <li><strong>Profit-loss ratio:</strong> 1.32</li>
+              <li><strong>Expectancy:</strong> 0.10 R per trade</li>
+              <li><strong>Turnover:</strong> ≈ 40 % of the book per&nbsp;year</li>
+              <li><strong>Fees:</strong> $0 (Alpaca sim)</li>
             </ul>
-          </div>
+            <div className="aspect-video w-full overflow-hidden border border-antique/20 mt-4">
+              <img
+                src="/results.png"
+                alt="Results"
+                className="w-full h-full"
+              />
+            </div>
+            <p className="text-xs opacity-60 mt-1">
+              Stats exported from QuantConnect run “Well Dressed Sky Blue Tapir”
+            </p>
+          </section>
         </Zapper>
 
-        {/* ───────────────── Next steps */}
+        {/* ───────────────── 10 · Next ideas */}
         <Zapper>
-          <div className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
-            <h3 className="text-lg font-semibold mb-3">Next → Ideas</h3>
+          <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
+            <h3 className="text-lg font-semibold mb-3">Next → Iteration ideas</h3>
             <ol className="list-decimal list-inside text-sm space-y-2 opacity-80">
-              <li>Switch to <strong>UniverseSelection</strong> of top‑3 NASDAQ by ADV; retrain multi‑symbol head.</li>
-              <li>Add <code>expanding_window_backtester.py</code> to benchmark walk‑forward vs static.</li>
-              <li>Shove predictions into a <code>n&gt;1</code> output «long & short» multi‑task net to trade pairs.</li>
-              <li>Quantify latency: feed QC live ticks to a self‑hosted FastAPI, compare vs built‑in <code>Algorithm</code>.</li>
+              <li>Pause short-selling when VIX &lt; 15 (fade traps).</li>
+              <li>Add a <code>&gt; 2 × ATR</code> gap filter to skip blow-outs at the open.</li>
+              <li>Rolling 20-day Sharpe guardrail → auto-suspend on 3 σ slumps.</li>
+              <li>Stream logs to FastAPI for near-real-time PnL dashboards.</li>
             </ol>
-          </div>
+            <p className="text-sm opacity-75 mt-4">
+              Building this bot was genuinely fun&mdash;every tweak taught me something new about
+              Lean and market micro-behaviour. I’m definitely going to sink more
+              evenings into refining these edges! :)
+            </p>
+          </section>
         </Zapper>
 
       </div>
