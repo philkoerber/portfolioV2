@@ -17,5 +17,3 @@ This is my interactive developer portfolio, built with **Next.js** and enhanced 
 ## 📍 Live Site
 
 [philippkoerber.com](https://philippkoerber.com)
-
-## 📂 Structure

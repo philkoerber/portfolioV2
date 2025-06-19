@@ -1,5 +1,7 @@
 import React from "react";
 import Zapper from "@/app/utils/Zapper";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+
 
 const projects = [
   {
@@ -37,6 +39,7 @@ const projects = [
     description:
       "Ever heard of the 'Fried Liver Attack'? Explore thousands of chess openings and their quirky names in this searchable, animated React app.",
     stack: ["React", "framer-motion"],
+    url: "https://openingnameexplorer.netlify.app"
   },
   {
     title: "BellmanBot",
@@ -94,9 +97,10 @@ function Web() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-gray-800 text-white text-sm font-semibold px-4 py-2 hover:bg-gray-700 transition duration-200 shadow-md"
+                    className="bg-verydark text-white text-sm font-semibold px-4 py-2 hover:bg-gray-700 transition duration-200 shadow-md w-full flex items-center justify-center gap-2"
                   >
-                    View on GitHub →
+                    <FaGithub className="w-4 h-4" />
+                    View on GitHub
                   </a>
                 )}
                 {project.url && (
@@ -104,9 +108,10 @@ function Web() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-antique text-verydark text-sm font-semibold px-4 py-2 hover:bg-antique/80 transition duration-200 shadow-md"
+                    className="flex items-center justify-center gap-2 text-center bg-antique text-verydark text-sm font-semibold px-4 py-2 hover:bg-antique/80 transition duration-200 shadow-md w-full"
                   >
-                    Visit {project.title} →
+                    Visit {project.title}
+                    <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
                 )}
               </div>
