@@ -6,7 +6,7 @@ const philippInfo = [
   { title: "Job", info: "Web Developer" },
   {
     title: "Background",
-    info: "Trained as an organ builder, traveled in my twenties, now a dedicated developer.",
+    info: "Trained as an organ builder, lived in Japan, now a dedicated developer.",
   },
   {
     title: "Work",
