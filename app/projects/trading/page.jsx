@@ -18,7 +18,7 @@ export default function EtfRsiMaV5Page() {
         <Zapper>
           <section className="bg-antique/10 backdrop-blur-sm p-6 border border-antique/30">
             <h1 className="text-2xl font-bold mb-1">
-              Daily ETF RSI-MA Bot <span className="text-antique/70">v5</span>
+              Daily ETF RSI-MA Bot on Quantconnect
             </h1>
             <h2 className="text-lg font-semibold mb-2">
               Hourly swing-trader with momentum fallback
