@@ -10,7 +10,6 @@ const projects = [
     description:
       "A daily tarot app featuring animated card draws and AI-generated meanings. Built for fast static delivery and optimized for sharing on social media.",
     stack: ["Next.js", "Supabase", "OpenAI", "framer-motion"],
-    video: "https://www.youtube.com/embed/sqepFgfLGuw?si=Cez8QpK_7ZX0kI9n",
     url: "https://soulscript.cards",
     github: "https://github.com/philkoerber/tarot",
   },
