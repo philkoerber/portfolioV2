@@ -5,6 +5,15 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const projects = [
   {
+    title: "Speedrun Chatbot",
+    subtitle: "Natural language queries over randomized run data",
+    description:
+      "A chatbot built with LlamaIndex that answers questions about Pokémon Red randomized speedruns by searching through exported CSV data. Integrated into a Next.js app for seamless user interaction.",
+    stack: ["Next.js", "LlamaIndex"],
+    github: "https://github.com/philkoerber/sswwiimm-randomizer", // Replace with actual repo if public
+    video: "https://www.youtube.com/watch?v=0KVYr7e5JtE"
+  },
+  {
     title: "Soulscript.Cards",
     subtitle: "AI-powered, monetized Tarot App",
     description:
