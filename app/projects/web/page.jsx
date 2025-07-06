@@ -11,7 +11,7 @@ const projects = [
       "A chatbot built with LlamaIndex that answers questions about Pokémon Red randomized speedruns by searching through exported CSV data. Integrated into a Next.js app for seamless user interaction.",
     stack: ["Next.js", "LlamaIndex"],
     github: "https://github.com/philkoerber/sswwiimm-randomizer", // Replace with actual repo if public
-    video: "https://www.youtube.com/watch?v=0KVYr7e5JtE"
+    video: "https://www.youtube.com/embed/0KVYr7e5JtE"
   },
   {
     title: "Soulscript.Cards",
